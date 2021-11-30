@@ -35,7 +35,6 @@ def parser(raw_results):
 
 def get_new_results(sp):
     raw_results = sp.currently_playing()
-    print(json.dumps(raw_results, indent=4))
     filterSuccess = False
     filtered_results = {}
     try:
@@ -76,13 +75,10 @@ if __name__ == '__main__':
             if cur_song != prev_song:
                 with open('song-name.txt', 'w') as f1:
                     f1.write(results[0]['name'])
-                    f1.close()
                 with open('artist-name.txt', 'w') as f2:
                     f2.write(results[0]['artist_name'])
-                    f2.close()
                 with open('album-name.txt', 'w') as f3:
                     f3.write(results[0]['album_name'])
-                    f3.close()
                 urllib.request.urlretrieve(results[0]['spotify_code'], 'spotify-code.jpg')
                 urllib.request.urlretrieve(results[0]['cover_url'], 'cover-url.jpg')
             prev_song = cur_song

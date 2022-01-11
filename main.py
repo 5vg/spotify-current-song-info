@@ -14,9 +14,7 @@ def get_spotify_code(uri):
     # format :
     # https://scannables.scdn.co/uri/plain/[format]/[background-color-in-hex]/[code-color-in-text]/[size]/[spotify-URI]
 
-    final_url = 'https://scannables.scdn.co/uri/plain/png/000000/white/640/' + uri
-
-    return final_url
+    return 'https://scannables.scdn.co/uri/plain/png/000000/white/640/' + uri
 
 
 def parser(raw_results):
@@ -35,16 +33,12 @@ def parser(raw_results):
 
 def get_new_results(sp):
     raw_results = sp.currently_playing()
-    filterSuccess = False
     filtered_results = {}
     try:
         filtered_results.update(parser(raw_results))
-        filterSuccess = True
-        return_packet = (filtered_results, filterSuccess)
-        return return_packet
+        return (filtered_results, True)
     except TypeError:
-        return_packet = (filtered_results, filterSuccess)
-        return return_packet
+        return (filtered_results, False)
 
 
 if __name__ == '__main__':
